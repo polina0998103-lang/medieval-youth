@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Создание персонажа</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px 14px;
+  background: #34251c;
+  color: #49301d;
+  font-family: Georgia, serif;
+}
+
+.container {
+  max-width: 520px;
+  margin: auto;
+  padding: 25px 20px;
+  background: #f0dfb5;
+  border: 5px double #987344;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px #0008;
+}
+
+h1 {
+  text-align: center;
+  color: #70451f;
+  font-size: 27px;
+}
+
+.subtitle {
+  text-align: center;
+  font-style: italic;
+}
+
+label {
+  display: block;
+  margin-top: 17px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  margin-top: 7px;
+  padding: 12px;
+  border: 1px solid #a88756;
+  border-radius: 7px;
+  background: #fff8e6;
+  color: #49301d;
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #70451f;
+  color: white;
+  font-size: 17px;
+  font-family: Georgia, serif;
+  cursor: pointer;
+}
+
+button:hover { background: #8b5c2d; }
+
+#saved {
+  display: none;
+  margin-top: 25px;
+  padding: 15px;
+  background: #e5d09e;
+  border: 2px solid #987344;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.back {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  color: #70451f;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>✦ Создание персонажа ✦</h1>
+  <p class="subtitle">Запиши свою историю в летопись города</p>
+
+  <form id="characterForm">
+    <label>Имя персонажа</label>
+    <input id="name" maxlength="40" required placeholder="Например, Алиса">
+
+    <label>Возраст</label>
+    <input id="age" type="number" min="1" max="100" required placeholder="Возраст">
+
+    <label>Происхождение</label>
+    <select id="origin">
+      <option>Житель города</option>
+      <option>Из деревни</option>
+      <option>Из замка</option>
+      <option>Путешественник</option>
+    </select>
+
+    <label>Профессия</label>
+    <select id="job">
+      <option>Ученик</option>
+      <option>Кузнец</option>
+      <option>Лекарь</option>
+      <option>Торговец</option>
+      <option>Ремесленник</option>
+      <option>Писарь</option>
+      <option>Музыкант</option>
+      <option>Исследователь</option>
+    </select>
+
+    <label>Характер</label>
+    <select id="personality">
+      <option>Добрый и отзывчивый</option>
+      <option>Смелый и решительный</option>
+      <option>Любознательный</option>
+      <option>Спокойный и мудрый</option>
+      <option>Весёлый и общительный</option>
+      <option>Загадочный</option>
+    </select>
+
+    <label>История персонажа</label>
+    <textarea id="story" maxlength="1500"
+      placeholder="Расскажи, кем был твой персонаж и о чём мечтает..."></textarea>
+
+    <button type="submit">📜 Сохранить персонажа</button>
+  </form>
+
+  <div id="saved">
+    <h2>✦ Твой персонаж ✦</h2>
+    <div id="profile"></div>
+    <button type="button" onclick="editCharacter()">Изменить персонажа</button>
+    <button type="button" onclick="deleteCharacter()">Удалить персонажа</button>
+  </div>
+
+  <a class="back" href="index.html">← Вернуться в город</a>
+</div>
+
+<script>
+const form = document.getElementById("characterForm");
+const saved = document.getElementById("saved");
+const profile = document.getElementById("profile");
+
+const fields = ["name", "age", "origin", "job", "personality", "story"];
+
+function showCharacter(data) {
+  profile.replaceChildren();
+
+  const labels = {
+    name: "Имя",
+    age: "Возраст",
+    origin: "Происхождение",
+    job: "Профессия",
+    personality: "Характер",
+    story: "История"
+  };
+
+  fields.forEach(key => {
+    const p = document.createElement("p");
+    const strong = document.createElement("strong");
+    strong.textContent = labels[key] + ": ";
+    p.append(strong, document.createTextNode(data[key] || "Не указано"));
