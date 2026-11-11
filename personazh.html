@@ -176,3 +176,65 @@ function showCharacter(data) {
     const strong = document.createElement("strong");
     strong.textContent = labels[key] + ": ";
     p.append(strong, document.createTextNode(data[key] || "Не указано"));
+    profile.appendChild(p);
+  });
+
+  saved.style.display = "block";
+  form.style.display = "none";
+}
+
+function loadCharacter() {
+  try {
+    const data = localStorage.getItem("medievalCharacter");
+    if (data) showCharacter(JSON.parse(data));
+  } catch (error) {
+    alert("Не удалось загрузить персонажа.");
+  }
+}
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const data = {};
+  fields.forEach(key => {
+    data[key] = document.getElementById(key).value.trim();
+  });
+
+  try {
+    localStorage.setItem("medievalCharacter", JSON.stringify(data));
+    showCharacter(data);
+    alert("Твой персонаж сохранён!");
+  } catch (error) {
+    alert("Не удалось сохранить персонажа на этом устройстве.");
+  }
+});
+
+function editCharacter() {
+  try {
+    const data = JSON.parse(localStorage.getItem("medievalCharacter"));
+    if (data) {
+      fields.forEach(key => {
+        document.getElementById(key).value = data[key] || "";
+      });
+    }
+    saved.style.display = "none";
+    form.style.display = "block";
+  } catch (error) {
+    alert("Не удалось открыть персонажа.");
+  }
+}
+
+function deleteCharacter() {
+  if (confirm("Точно удалить своего персонажа?")) {
+    localStorage.removeItem("medievalCharacter");
+    form.reset();
+    saved.style.display = "none";
+    form.style.display = "block";
+  }
+}
+
+loadCharacter();
+</script>
+
+</body>
+</html>
