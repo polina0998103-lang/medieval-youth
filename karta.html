@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Средневековый город</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 18px 12px;
+  background: #30251d;
+  color: #50351f;
+  font-family: Georgia, serif;
+}
+
+.container {
+  max-width: 650px;
+  margin: auto;
+  padding: 18px;
+  background: #f0dfb5;
+  border: 5px double #987344;
+  border-radius: 12px;
+}
+
+h1 { text-align: center; color: #70451f; }
+.subtitle { text-align: center; font-style: italic; }
+
+.city {
+  position: relative;
+  min-height: 490px;
+  padding: 15px;
+  border: 3px solid #987344;
+  border-radius: 12px;
+  background:
+    radial-gradient(ellipse at 50% 45%, #d7c28c 0 35%, transparent 36%),
+    linear-gradient(135deg, #a4a76c, #d0bc80 48%, #8d9a67);
+  overflow: hidden;
+}
+
+.road {
+  position: absolute;
+  width: 110%;
+  height: 65px;
+  left: -5%;
+  top: 46%;
+  background: #d8bd8c;
+  border-top: 3px solid #a58a60;
+  border-bottom: 3px solid #a58a60;
+  transform: rotate(-12deg);
+}
+
+.buildings {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.place {
+  min-height: 105px;
+  border: 3px solid #78502d;
+  border-radius: 12px;
+  background: #f5e6c4;
+  color: #50351f;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 5px #49301d55;
+}
+
+.place span {
+  display: block;
+  font-size: 35px;
+  margin-bottom: 5px;
+}
+
+.place:active { transform: scale(.96); }
+
+#info {
+  display: none;
+  margin-top: 18px;
+  padding: 15px;
+  background: #e3ce9e;
+  border: 2px solid #987344;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
+#info h2 { margin-top: 0; }
+
+.close {
+  width: 100%;
+  padding: 11px;
+  border: 0;
+  border-radius: 7px;
+  background: #70451f;
+  color: white;
+  font-size: 16px;
+}
+
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #70451f;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>🏰 Наш средневековый город</h1>
+<p class="subtitle">Нажимай на здания и исследуй город!</p>
+
+<div class="city">
+  <div class="road"></div>
+  <div class="buildings">
+
+    <button class="place" onclick="openPlace('castle')">
+      <span>🏰</span>Замок
+    </button>
+
+    <button class="place" onclick="openPlace('market')">
+      <span>🛒</span>Рынок
+    </button>
+
+    <button class="place" onclick="openPlace('forge')">
+      <span>⚒️</span>Кузница
+    </button>
+
+    <button class="place" onclick="openPlace('bakery')">
+      <span>🍞</span>Пекарня
+    </button>
+
+    <button class="place" onclick="openPlace('school')">
+      <span>📚</span>Школа
+    </button>
+
+    <button class="place" onclick="openPlace('homes')">
+      <span>🏡</span>Жилые дома
+    </button>
+
+    <button class="place" onclick="openPlace('square')">
+      <span>🌳</span>Площадь
+    </button>
+
+    <button class="place" onclick="openPlace('tavern')">
+      <span>🏮</span>Таверна
+    </button>
+
+  </div>
+</div>
+
+<div id="info">
+  <h2 id="placeTitle"></h2>
+  <p id="placeText"></p>
+  <button class="close" onclick="closePlace()">Закрыть</button>
+</div>
+
+<a class="back" href="index.html">← Вернуться на главную</a>
+</div>
+
+<script>
+const places = {
+  castle: {
+    title: "🏰 Замок",
+    text: "Здесь живут правитель города и его семья. В замке проходят торжественные приёмы, а стража охраняет ворота."
+  },
+  market: {
+    title: "🛒 Рыночная площадь",
+    text: "На рынке торговцы продают овощи, ткани, посуду и украшения. Здесь всегда много разговоров и новостей."
+  },
+  forge: {
+    title: "⚒️ Кузница",
+    text: "Кузнец работает с металлом и создаёт подковы, инструменты, замки и разные полезные вещи."
+  },
+  bakery: {
+    title: "🍞 Пекарня",
+    text: "С раннего утра здесь пахнет свежим хлебом, пирогами и булочками. Пекарь знает множество рецептов."
+  },
+  school: {
+    title: "📚 Школа",
+    text: "Здесь дети учатся читать, писать, считать и знакомятся с историей своего города."
+  },
+  homes: {
+    title: "🏡 Жилые дома",
+    text: "В этих домах живут семьи ремесленников, торговцев и других горожан. У каждого дома своя история."
+  },
+  square: {
+    title: "🌳 Городская площадь",
+    text: "Здесь проводят праздники, ярмарки, выступления музыкантов и встречи жителей."
+  },
+  tavern: {
+    title: "🏮 Таверна",
+    text: "В таверне путешественники отдыхают, жители общаются, а хозяин рассказывает интересные городские новости."
+  }
+};
+
+function openPlace(id) {
+  const place = places[id];
+  document.getElementById("placeTitle").textContent = place.title;
+  document.getElementById("placeText").textContent = place.text;
+  document.getElementById("info").style.display = "block";
+  document.getElementById("info").scrollIntoView({behavior: "smooth"});
+}
+
+function closePlace() {
+  document.getElementById("info").style.display = "none";
+}
+</script>
+
+</body>
+</html>
