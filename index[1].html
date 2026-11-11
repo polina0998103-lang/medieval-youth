@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#493322">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Средневековье">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>Юность за крепостными стенами</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; padding-bottom: env(safe-area-inset-bottom);
+      font-family: Georgia, "Times New Roman", serif;
+      color: #30251c; background: #f4ead8; line-height: 1.6;
+    }
+    header {
+      padding: 62px 20px 55px; text-align: center; color: #fff8e9;
+      background: radial-gradient(circle at 50% 15%, #a77a4d 0, #65452d 46%, #30251c 100%);
+    }
+    header .castle { font-size: 3.2rem; line-height: 1.2; }
+    header h1 { margin: 12px 0; font-size: clamp(2rem, 8vw, 3.2rem); line-height: 1.1; }
+    header p { margin: 0; font-size: 1.08rem; }
+    nav {
+      position: sticky; top: 0; z-index: 5; display: flex; justify-content: center;
+      flex-wrap: wrap; gap: 8px 18px; padding: 12px 10px;
+      background: #493322; box-shadow: 0 2px 8px #0002;
+    }
+    nav a { color: #fff2d8; text-decoration: none; font-size: .95rem; }
+    nav a:hover { text-decoration: underline; }
+    main { max-width: 900px; margin: auto; padding: 18px 15px 38px; }
+    section {
+      margin: 18px 0; padding: 22px; background: #fffaf0;
+      border: 1px solid #dfc9a8; border-radius: 14px;
+      box-shadow: 0 3px 12px #5037190c;
+      scroll-margin-top: 75px;
+    }
+    h2 { margin: 0 0 12px; color: #704526; font-size: 1.55rem; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 13px; }
+    .card { padding: 15px; background: #f1e2c8; border-radius: 10px; }
+    .card h3 { margin: 0 0 6px; color: #704526; }
+    .card p { margin: 0; }
+    .fact { border-left: 4px solid #a36b37; padding: 10px 14px; background: #f7eddc; }
+    button {
+      border: 0; border-radius: 9px; padding: 12px 18px; cursor: pointer;
+      color: white; background: #79502f; font: inherit; font-weight: bold;
+    }
+    button:active { transform: scale(.98); }
+    #answer { margin-top: 12px; font-weight: bold; color: #704526; }
+    footer { text-align: center; padding: 20px 12px; color: #fff2d8; background: #493322; }
+    @media (max-width: 430px) {
+      nav { gap: 7px 12px; }
+      nav a { font-size: .88rem; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="castle" aria-hidden="true">🏰</div>
+    <h1>Юность за крепостными стенами</h1>
+    <p>Как жили подростки в средневековом городе</p>
+  </header>
+
+  <nav aria-label="Навигация">
+    <a href="#home">Главная</a>
+    <a href="#daily">Жизнь</a>
+    <a href="#learning">Учёба и работа</a>
+    <a href="#facts">Факты и викторина</a>
+  </nav>
+
+  <main>
+    <section id="home">
+      <h2>Добро пожаловать в Средневековье!</h2>
+      <p>Представь город с узкими улочками, шумным рынком, ремесленными мастерскими
+      и высокими каменными стенами. Здесь жили дети и подростки, чья жизнь во
+      многом отличалась от современной.</p>
+    </section>
+
+    <section id="daily">
+      <h2>Повседневная жизнь</h2>
+      <div class="cards">
+        <article class="card"><h3>🏠 Дома</h3>
+          <p>Многие семьи жили в небольших домах над лавками или мастерскими.
+          Часто несколько поколений делили одно жилище.</p></article>
+        <article class="card"><h3>🥖 Еда</h3>
+          <p>На столе часто были хлеб, каша, овощи и похлёбка. Еда зависела
+          от достатка семьи и местных традиций.</p></article>
+        <article class="card"><h3>🎲 Свободное время</h3>
+          <p>Дети играли в простые игры, бегали по улицам, слушали истории
+          и помогали готовить семейные праздники.</p></article>
+      </div>
+    </section>
+
+    <section id="learning">
+      <h2>Учёба и работа</h2>
+      <p>Не все подростки ходили в школу. Некоторые учились читать и писать,
+      а многие осваивали ремесло у родителей или мастера.</p>
+      <ul>
+        <li>В мастерской можно было стать учеником пекаря, портного или гончара.</li>
+        <li>В торговой семье подростки помогали в лавке и учились считать деньги.</li>
+        <li>Некоторые посещали церковную или городскую школу.</li>
+      </ul>
+    </section>
+
+    <section id="facts">
+      <h2>Интересный факт</h2>
+      <p class="fact">Средневековые города были шумными и оживлёнными: на рынках
+      торговали продуктами, тканями, посудой и изделиями ремесленников.</p>
+      <p>Проверь себя: чем подросток мог заниматься, если его семья держала мастерскую?</p>
+      <button id="answerButton" type="button">Узнать ответ</button>
+      <p id="answer" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>Учебное приложение · Жизнь подростков в Средневековье</footer>
+  <script>
+    document.getElementById("answerButton").addEventListener("click", () => {
+      document.getElementById("answer").textContent =
+        "Он мог помогать семье и учиться ремеслу у опытного мастера.";
+    });
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "Юность за крепостными стенами",
+  "short_name": "Средневековье",
+  "description": "Как жили подростки в средневековом городе",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4ead8",
+  "theme_color": "#493322",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
